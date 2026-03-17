@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const claimController = require('../controllers/claimController');
-const authMiddleware = require('../middleware/authMiddleware');
-const rbacMiddleware = require('../middleware/rbacMiddleware');
+import express from "express";
+import * as claimController from "../controllers/claimController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import rbacMiddleware from "../middleware/rbacMiddleware.js";
 
+const router = express.Router();
 router.use(authMiddleware);
 
 // Submit claim
@@ -25,4 +25,4 @@ router.put('/:id', rbacMiddleware(['CLAIMS_ADJUSTER']), claimController.updateCl
 // Delete claim
 router.delete('/:id', rbacMiddleware(['CLAIMS_ADJUSTER']), claimController.deleteClaim);
 
-module.exports = router;
+export default router;

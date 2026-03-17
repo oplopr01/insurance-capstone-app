@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const reinsuranceController = require('../controllers/reinsuranceController');
-const authMiddleware = require('../middleware/authMiddleware');
-const rbacMiddleware = require('../middleware/rbacMiddleware');
+import express from "express";
+import * as reinsuranceController from "../controllers/reinsuranceController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import rbacMiddleware from "../middleware/rbacMiddleware.js";
 
+const router = express.Router();
 router.use(authMiddleware);
 
 // Treaties
@@ -16,4 +16,4 @@ router.post('/allocations', rbacMiddleware(['REINSURANCE_MANAGER']), reinsurance
 router.get('/reinsurers', reinsuranceController.getReinsurers);
 router.post('/reinsurers', rbacMiddleware(['REINSURANCE_MANAGER']), reinsuranceController.createReinsurer);
 
-module.exports = router;
+export default router;

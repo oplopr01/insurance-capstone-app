@@ -1,18 +1,14 @@
-const express = require('express');
+import express from "express";
+import cors from "cors";
+
+import authRoutes from "./routes/authRoutes.js";
+import policyRoutes from "./routes/policyRoutes.js";
+import claimRoutes from "./routes/claimRoutes.js";
+import reinsuranceRoutes from "./routes/reinsuranceRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
+
 const app = express();
-const cors = require('cors');
-
-const authRoutes = require('./routes/authRoutes');
-
-const policyRoutes = require('./routes/policyRoutes');
-
-const claimRoutes = require('./routes/claimRoutes');
-
-const reinsuranceRoutes = require('./routes/reinsuranceRoutes');
-
-const adminRoutes = require('./routes/adminRoutes');
-
-const dashboardRoutes = require('./routes/dashboardRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -32,4 +28,4 @@ app.get('/', (req, res) => {
     res.send("Hello");
 });
 
-module.exports = app;
+export default app;

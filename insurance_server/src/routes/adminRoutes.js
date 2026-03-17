@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const adminController = require('../controllers/adminController');
-const authMiddleware = require('../middleware/authMiddleware');
-const rbacMiddleware = require('../middleware/rbacMiddleware');
+import express from "express";
+import * as adminController from "../controllers/adminController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import rbacMiddleware from "../middleware/rbacMiddleware.js";
 
+const router = express.Router();
 router.use(authMiddleware);
 
 // User management
@@ -15,4 +15,4 @@ router.delete('/users/:id', rbacMiddleware(['ADMIN']), adminController.deleteUse
 // Audit logs
 router.get('/audit-logs', rbacMiddleware(['ADMIN']), adminController.getAuditLogs);
 
-module.exports = router;
+export default router;

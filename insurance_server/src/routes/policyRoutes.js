@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const policyController = require('../controllers/policyController');
-const authMiddleware = require('../middleware/authMiddleware');
-const rbacMiddleware = require('../middleware/rbacMiddleware');
+import express from "express";
+import * as policyController from "../controllers/policyController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import rbacMiddleware from "../middleware/rbacMiddleware.js";
 
+const router = express.Router();
 // All routes require authentication
 router.use(authMiddleware);
 
@@ -22,4 +22,4 @@ router.put('/:id', rbacMiddleware(['UNDERWRITER']), policyController.updatePolic
 // Delete policy
 router.delete('/:id', rbacMiddleware(['UNDERWRITER']), policyController.deletePolicy);
 
-module.exports = router;
+export default router;

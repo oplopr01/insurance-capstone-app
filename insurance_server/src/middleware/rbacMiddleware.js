@@ -1,11 +1,15 @@
 const rbacMiddleware = (roles = []) => {
   return (req, res, next) => {
-    if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
-    if (!roles.includes(req.user.role)) {
-      return res.status(403).json({ message: 'Forbidden: Insufficient role' });
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
     }
+
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ message: "Forbidden: Insufficient role" });
+    }
+
     next();
   };
 };
 
-module.exports = rbacMiddleware;
+export default rbacMiddleware;

@@ -1,10 +1,11 @@
 // createUsers.js
 // Run with: node createUsers.js
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import User from "./src/models/User.js";
+import dotenv from "dotenv";
 
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const User = require('./src/models/User');
-require('dotenv').config();
+dotenv.config();
 
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/insurance_db_v2';
 

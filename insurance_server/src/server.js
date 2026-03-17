@@ -1,11 +1,9 @@
 import cors from "cors";
-// server entry point
-const dotenv = require('dotenv');
+import dotenv from "dotenv";
 dotenv.config();
 
-const app = require('./app');
-const connectToDb = require('./config/db');
-
+import app from "./app.js";
+import connectToDb from "./config/db.js";
 connectToDb();
 
 app.listen(process.env.PORT, () => {

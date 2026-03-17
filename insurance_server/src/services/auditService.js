@@ -1,6 +1,14 @@
-const AuditLog = require('../models/AuditLog');
+import AuditLog from "../models/AuditLog.js";
 
-const logAction = async ({ entityType, entityId, action, oldValue, newValue, performedBy, ipAddress }) => {
+export const logAction = async ({
+  entityType,
+  entityId,
+  action,
+  oldValue,
+  newValue,
+  performedBy,
+  ipAddress
+}) => {
   const log = new AuditLog({
     entityType,
     entityId,
@@ -11,7 +19,6 @@ const logAction = async ({ entityType, entityId, action, oldValue, newValue, per
     ipAddress,
     performedAt: new Date()
   });
+
   await log.save();
 };
-
-module.exports = { logAction };

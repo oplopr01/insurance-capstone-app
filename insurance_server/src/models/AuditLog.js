@@ -1,22 +1,30 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const auditLogSchema = new mongoose.Schema({
   entityType: {
     type: String,
-    enum: ['POLICY', 'CLAIM', 'TREATY', 'USER'],
+    enum: ["POLICY", "CLAIM", "TREATY", "USER"],
     required: true
   },
-  entityId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  entityId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
   action: {
     type: String,
-    enum: ['CREATE', 'UPDATE', 'DELETE', 'APPROVE'],
+    enum: ["CREATE", "UPDATE", "DELETE", "APPROVE"],
     required: true
   },
   oldValue: { type: Object },
   newValue: { type: Object },
-  performedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  performedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
   performedAt: { type: Date, default: Date.now },
   ipAddress: { type: String }
 });
 
-module.exports = mongoose.model('AuditLog', auditLogSchema);
+const AuditLog = mongoose.model("AuditLog", auditLogSchema);
+
+export default AuditLog;
