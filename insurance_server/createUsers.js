@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://loha:aA123456@#@insurance-app.idfzmtv.mongodb.net/?appName=insurance-app';
+const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://loha1:0tH053fAWyG1cMWy@insurance-app.idfzmtv.mongodb.net/insuranceDB?retryWrites=true&w=majority';
 
 const users = [
   {
