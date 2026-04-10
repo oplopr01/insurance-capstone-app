@@ -4,17 +4,24 @@ dotenv.config();
 import app from "./app.js";
 import connectToDb from "./config/db.js";
 
-const startServer = async () => {
-  try {
-    await connectToDb(); // ✅ MUST succeed first
+// cache DB connection across requests (VERY IMPORTANT)
+let isConnected = false;
 
-    app.listen(process.env.PORT, () => {
-      console.log("Server running on port", process.env.PORT);
-    });
+const handler = async (req, res) => {
+  try {
+    // connect DB only once
+    if (!isConnected) {
+      await connectToDb();
+      isConnected = true;
+    }
+
+    // pass request to express app
+    return app(req, res);
 
   } catch (error) {
-    console.error("Server failed:", error);
+    console.error("Server Error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-startServer();
+export default handler;
