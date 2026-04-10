@@ -10,22 +10,26 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const app = express();
 
-app.use(cors());
+// ✅ FIXED CORS CONFIG
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
+
+// Routes
 app.use('/api/auth', authRoutes);
-
 app.use('/api/policies', policyRoutes);
-
 app.use('/api/claims', claimRoutes);
-
 app.use('/api/reinsurance', reinsuranceRoutes);
-
 app.use('/api/admin', adminRoutes);
-
 app.use('/api/dashboard', dashboardRoutes);
 
+// Test route
 app.get('/', (req, res) => {
-    res.send("Hello");
+  res.send("Hello");
 });
 
 export default app;
